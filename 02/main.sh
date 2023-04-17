@@ -5,13 +5,21 @@
 . ./brain.sh
 
 export current_date=$(date +%d%m%y)
+export LOG_DATE=$(date +'%Y.%m.%d-%H:%M')
 export FREE_SPACE=$(df -k / | awk '{print $4}' | tail -n 1)
-export LOG_FILE="log.txt"
+export LOG_FILE="1.log"
 touch $LOG_FILE
 
+
+if [ "$#" -ne 3 ]; then
+    echo "Ошибка: неверное количество аргументов. Используйте 3 аргумента, соответствующих описанным параметрам" >&2
+    exit 1
+fi
 check_input "$1" "$2" "$3"
 
 export start_time=$(date +%s)  # сохраняем время начала выполнения скрипта в секундах с начала эпохи UNIX
+echo "Program started at ${start_time}" >> $LOG_FILE
+
 
 mapfile -t arr < <(find / -type d -perm -o+w 2> /dev/null | grep -v -e proc -e bin -e sbin -e Permission)
 export NUMBER_DIR="${#arr[@]}"
@@ -55,5 +63,8 @@ column -t $LOG_FILE > temp_file.txt && mv temp_file.txt $LOG_FILE
 
 export end_time=$(date +%s)  # сохраняем время окончания выполнения скрипта в секундах с начала эпохи UNIX
 export runtime=$((end_time-start_time))  # вычисляем время выполнения скрипта в секундах
-echo "Total runtime: $runtime seconds"
+
+
+echo "Program ended at ${end_time}" >> $LOG_FILE
+echo "Total runtime: $runtime seconds" >> $LOG_FILE
 

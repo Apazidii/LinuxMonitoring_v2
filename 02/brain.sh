@@ -31,7 +31,7 @@ function generate_FLname(){
         name="${name}$last_char"
     done
 
-    name="${name}.${ext}_${current_date}"
+    name="${name}_${current_date}.${ext}"
     echo $name
 }
 
@@ -42,8 +42,7 @@ function genetane_DIR() {
 
     if [ ! -d "${DIR_PATH}/${DIR_NAME}" ]; then
         mkdir "${DIR_PATH}/${DIR_NAME}"
-        echo -e "${DIR_PATH}/${DIR_NAME} ${current_date}" >> $LOG_FILE
-        echo -e "${FL_PATH}/${FL_NAME} ${current_date} $FL_SIZE"
+        echo -e "${DIR_PATH}/${DIR_NAME} ${LOG_DATE}" >> $LOG_FILE
 
         return 0
     else
@@ -61,8 +60,7 @@ function generate_FILE() {
     if [ ! -f "${FL_PATH}/${FL_NAME}" ]; then
         touch "${FL_PATH}/${FL_NAME}"
         fallocate -l $FL_SIZE "${FL_PATH}/${FL_NAME}"
-        echo -e "${FL_PATH}/${FL_NAME} ${current_date} $FL_SIZE" >> $LOG_FILE
-        echo -e "${FL_PATH}/${FL_NAME} ${current_date} $FL_SIZE"
+        echo -e "${FL_PATH}/${FL_NAME} ${LOG_DATE} $FL_SIZE" >> $LOG_FILE
 
         return 0
     else
