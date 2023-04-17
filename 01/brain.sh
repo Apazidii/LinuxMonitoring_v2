@@ -31,7 +31,7 @@ function generate_FLname(){
         name="${name}$last_char"
     done
 
-    name="${name}.${ext}_${current_date}"
+    name="${name}_${current_date}.${ext}"
     echo $name
 }
 

@@ -2,7 +2,7 @@
 
 export current_date=$(date +%d%m%y)
 export FREE_SPACE=$(df -k / | awk '{print $4}' | tail -n 1)
-export LOG_FILE="log.txt"
+export LOG_FILE="1.log"
 
 # Параметр 1 - это абсолютный путь. 
 # Параметр 2 - количество вложенных папок. 
