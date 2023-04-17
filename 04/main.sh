@@ -5,8 +5,20 @@ function random_ip() {
     printf "%d.%d.%d.%d" "$((RANDOM % 256))" "$((RANDOM % 256))" "$((RANDOM % 256))" "$((RANDOM % 256))"
 }
 
+
 # Список кодов ответа
-response_codes=("200" "201" "400" "401" "403" "404" "500" "501" "502" "503")
+response_codes=(
+    "200" # OK
+    "201" # CREATED
+    "400" # BAD_REQUEST
+    "401" # UNAUTHORIZED
+    "403" # FORBIDDEN
+    "404" # NOT_FOUND
+    "500" # INTERNAL_SERVER_ERROR
+    "501" # NOT_IMPLEMENTED
+    "502" # BAD_GATEWAY
+    "503" # SERVICE_UNAVAILABLE
+    )
 
 # Список методов
 methods=("GET" "POST" "PUT" "PATCH" "DELETE")
@@ -48,3 +60,5 @@ for day in {1..5}; do
     sort -k 4 -o "$log_file" "$log_file"
 
 done
+
+
