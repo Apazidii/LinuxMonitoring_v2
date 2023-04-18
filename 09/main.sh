@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# output_file="/usr/share/nginx/html/metrics.html"
-output_file="./metrics.html"
+output_file="/usr/share/nginx/html/metrics.html"
+# output_file="./metrics.html"
 
 if [ $# != 0 ]
 then
@@ -22,7 +22,7 @@ while true; do
     myex_space_us="$(df /| grep / | awk '{print $3}')"
     
 
-    echo -n"" > $output_file
+    echo -n "" > $output_file
 
     print_metric "myex_cpu" $myex_cpu
     print_metric "myex_ram" $myex_ram
