@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# output_file="/usr/share/nginx/html/metrics.html"
-output_file="./metrics.html"
+output_file="/usr/share/nginx/html/metrics.html"
+# output_file="./metrics.html"
 
 if [ $# != 0 ]
 then
