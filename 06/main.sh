@@ -2,7 +2,8 @@
 
 if [ $# != 0 ]
 then
-    echo "Invalid number of arguments (should be 0)"
+    echo "Ошибка: неверное количество аргументов." >&2
+    exit 1
 else
     echo "Введите путь к лог-файлу"
     local LOG_FILE

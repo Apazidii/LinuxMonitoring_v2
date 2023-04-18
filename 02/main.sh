@@ -65,6 +65,12 @@ export end_time=$(date +%s)  # сохраняем время окончания 
 export runtime=$((end_time-start_time))  # вычисляем время выполнения скрипта в секундах
 
 
+echo "Program started at ${start_time}" >> $LOG_FILE
 echo "Program ended at ${end_time}" >> $LOG_FILE
 echo "Total runtime: $runtime seconds" >> $LOG_FILE
+
+echo "Program started at ${start_time}"
+echo "Program ended at ${end_time}"
+echo "Total runtime: $runtime seconds"
+
 
