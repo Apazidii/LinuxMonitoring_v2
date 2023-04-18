@@ -15,7 +15,7 @@ function print_metric() {
 }
 
 while true; do
-    
+    echo "" > $output_file
     myex_cpu="$(cat /proc/loadavg | awk '{print $1}')"
     myex_ram="$(free | grep Mem | awk '{print $2}')"
     myex_ram_us="$(free | grep Mem | awk '{print $3}')"
