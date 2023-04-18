@@ -1,7 +1,7 @@
 #!/bin/bash
 
-output_file="/usr/share/nginx/html/metrics.html"
-# output_file="./metrics.html"
+# output_file="/usr/share/nginx/html/metrics.html"
+output_file="./metrics.html"
 
 if [ $# != 0 ]
 then
@@ -16,8 +16,8 @@ function print_metric() {
 
 while true; do
     myex_cpu="$(cat /proc/loadavg | awk '{print $1}')"
-    myex_ram="$(free | grep Mem | awk '{print $2}')"
-    myex_ram_us="$(free | grep Mem | awk '{print $3}')"
+    myex_ram="$(free | head -2 | tail -1 | awk '{print $2}')"
+    myex_ram_us="$(free | head -2 | tail -1 | awk '{print $3}')"
     myex_space="$(df /| grep / | awk '{print $2}')"
     myex_space_us="$(df /| grep / | awk '{print $3}')"
     
