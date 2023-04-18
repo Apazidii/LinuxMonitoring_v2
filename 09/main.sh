@@ -9,22 +9,26 @@ then
     exit 1
 fi
 
-while true; do
-  cpu_percentage=$(top -b -n1 | grep "Cpu(s)" | awk '{print $2 + $4}' | sed 's/\,/\\./g')
-  memory_total=$(grep MemTotal /proc/meminfo | awk '{print $2}')
-  memory_free=$(grep MemFree /proc/meminfo | awk '{print $2}')
-  disk_usage=$(df -k / | awk '{print $4}' | tail -n 1)
+function print_metric() {
+    echo "# TYPE $1 gauge" >> $3
+    echo "$1 $2" >> $3
+}
 
-  cat > "$output_file" << EOL
-# TYPE system_cpu_usage gauge
-system_cpu_usage $cpu_percentage
-# TYPE system_memory_total gauge
-system_memory_total $memory_total
-# TYPE system_memory_free gauge
-system_memory_free $memory_free
-# TYPE system_disk_usage gauge
-system_disk_usage $disk_usage
-EOL
+while true; do
+    
+    myex_cpu="$(cat /proc/loadavg | awk '{print $1}')"
+    myex_ram="$(free | grep Mem | awk '{print $2}')"
+    myex_ram_us="$(free | grep Mem | awk '{print $3}')"
+    myex_space="$(df /| grep / | awk '{print $2}')"
+    myex_space_us="$(df /| grep / | awk '{print $3}')"
+    
+    print_metric "myex_cpu" $myex_cpu $output_file
+    print_metric "myex_ram" $myex_ram $output_file
+    print_metric "myex_ram_us" $myex_ram_us $output_file
+    print_metric "myex_space" $myex_space $output_file
+    print_metric "myex_space_us" $myex_space_us $output_file
+    
     cat $output_file
-  sleep 1
+
+    sleep 3
 done
