@@ -28,6 +28,6 @@ while true; do
     print_metric "myex_space" $myex_space
     print_metric "myex_space_us" $myex_space_us
     
-    echo "Program working..."
+    echo "[$(date +%s)] Program working..."
     sleep 3
 done
