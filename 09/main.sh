@@ -10,7 +10,7 @@ then
 fi
 
 while true; do
-  cpu_percentage=$(top -b -n1 | grep "Cpu(s)" | awk '{print $2 + $4}')
+  cpu_percentage=$(top -b -n1 | grep "Cpu(s)" | awk '{print $2 + $4}' | sed 's/\,/\\./g')
   memory_total=$(grep MemTotal /proc/meminfo | awk '{print $2}')
   memory_free=$(grep MemFree /proc/meminfo | awk '{print $2}')
   disk_usage=$(df -k / | awk '{print $4}' | tail -n 1)
@@ -26,5 +26,5 @@ system_memory_free $memory_free
 system_disk_usage $disk_usage
 EOL
     cat $output_file
-  sleep 3
+  sleep 1
 done
